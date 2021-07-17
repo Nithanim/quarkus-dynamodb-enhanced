@@ -1,4 +1,4 @@
-package org.acme.aws.dynamodb.fix.deployment;
+package org.acme.aws.dynamodb.fix.runtime;
 
 import java.util.List;
 
