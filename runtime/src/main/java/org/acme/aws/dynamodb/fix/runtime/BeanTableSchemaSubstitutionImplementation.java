@@ -8,14 +8,18 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class SubstitutionImplementation {
+/**
+ * This class holds the new method bodies (implementation) of the methods that are replaced by
+ * substitution in native-image.
+ */
+public class BeanTableSchemaSubstitutionImplementation {
   public static <T> Supplier<T> newObjectSupplierForClass(Class<T> clazz) {
     try {
       MethodHandle mh = MethodHandles.publicLookup().unreflectConstructor(clazz.getConstructor());
       return new ConstructorWrapper<>(mh);
     } catch (IllegalAccessException | NoSuchMethodException ex) {
       throw new IllegalStateException(
-          "Custom GVM Sub: Unable to convert Constructor to MethodHandle!", ex);
+          "SVM Substitution: Unable to convert Constructor to MethodHandle!", ex);
     }
   }
 
@@ -27,7 +31,7 @@ public class SubstitutionImplementation {
       return new GetterWrapper<>(mh);
     } catch (IllegalAccessException ex) {
       throw new IllegalStateException(
-          "Custom GVM Sub: Unable to convert Getter-Method to MethodHandle!", ex);
+          "SVM Substitution: Unable to convert Getter-Method to MethodHandle!", ex);
     }
   }
 
@@ -39,7 +43,7 @@ public class SubstitutionImplementation {
       return new SetterWrapper<>(mh);
     } catch (IllegalAccessException ex) {
       throw new IllegalStateException(
-          "Custom GVM Sub: Unable to convert Setter-Method to MethodHandle!", ex);
+          "SVM Substitution: Unable to convert Setter-Method to MethodHandle!", ex);
     }
   }
 
@@ -56,12 +60,12 @@ public class SubstitutionImplementation {
       try {
         return (T) mh.invoke();
       } catch (Exception ex) {
-        throw new IllegalStateException("Custom GVM Sub: Exception invoking getter!", ex);
+        throw new IllegalStateException("SVM Substitution: Exception invoking getter!", ex);
       } catch (Error error) {
         throw error;
       } catch (Throwable throwable) {
         throw new Error(
-            "Custom GVM Sub: No other direct descendant of Throwable should exist!", throwable);
+            "SVM Substitution: No other direct descendant of Throwable should exist!", throwable);
       }
     }
   }
@@ -79,12 +83,12 @@ public class SubstitutionImplementation {
       try {
         return (R) mh.invoke(t);
       } catch (Exception ex) {
-        throw new IllegalStateException("Custom GVM Sub: Exception invoking getter!", ex);
+        throw new IllegalStateException("SVM Substitution: Exception invoking getter!", ex);
       } catch (Error error) {
         throw error;
       } catch (Throwable throwable) {
         throw new Error(
-            "Custom GVM Sub: No other direct descendant of Throwable should exist!", throwable);
+            "SVM Substitution: No other direct descendant of Throwable should exist!", throwable);
       }
     }
   }
@@ -101,12 +105,12 @@ public class SubstitutionImplementation {
       try {
         mh.invoke(object, value);
       } catch (Exception ex) {
-        throw new IllegalStateException("Custom GVM Sub: Exception invoking getter!", ex);
+        throw new IllegalStateException("SVM Substitution: Exception invoking getter!", ex);
       } catch (Error error) {
         throw error;
       } catch (Throwable throwable) {
         throw new Error(
-            "Custom GVM Sub: No other direct descendant of Throwable should exist!", throwable);
+            "SVM Substitution: No other direct descendant of Throwable should exist!", throwable);
       }
     }
   }

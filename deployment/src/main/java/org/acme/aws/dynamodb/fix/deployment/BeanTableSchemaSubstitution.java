@@ -5,7 +5,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import org.acme.aws.dynamodb.fix.runtime.SubstitutionImplementation;
+import org.acme.aws.dynamodb.fix.runtime.BeanTableSchemaSubstitutionImplementation;
 
 import com.oracle.svm.core.annotate.Substitute;
 import com.oracle.svm.core.annotate.TargetClass;
@@ -35,18 +35,18 @@ public final class BeanTableSchemaSubstitution {
 
   @Substitute
   private static <T> Supplier<T> newObjectSupplierForClass(Class<T> clazz) {
-    return SubstitutionImplementation.newObjectSupplierForClass(clazz);
+    return BeanTableSchemaSubstitutionImplementation.newObjectSupplierForClass(clazz);
   }
 
   @Substitute
   private static <T, R> Function<T, R> getterForProperty(
       PropertyDescriptor propertyDescriptor, Class<T> beanClass) {
-    return SubstitutionImplementation.getterForProperty(propertyDescriptor, beanClass);
+    return BeanTableSchemaSubstitutionImplementation.getterForProperty(propertyDescriptor, beanClass);
   }
 
   @Substitute
   private static <T, U> BiConsumer<T, U> setterForProperty(
       PropertyDescriptor propertyDescriptor, Class<T> beanClass) {
-    return SubstitutionImplementation.setterForProperty(propertyDescriptor, beanClass);
+    return BeanTableSchemaSubstitutionImplementation.setterForProperty(propertyDescriptor, beanClass);
   }
 }

@@ -23,13 +23,13 @@ public class DynamodbEnhancedFeatureFeature implements Feature {
 
   @Override
   public void duringSetup(DuringSetupAccess access) {
-    System.out.println("Custom GVM Sub");
     try {
       RuntimeReflection.register(DefaultAttributeConverterProvider.class.getConstructor());
       RuntimeReflection.register(BeanTableSchemaAttributeTags.class);
       RuntimeReflection.register(BeanTableSchemaAttributeTags.class.getMethods());
-    } catch (NoSuchMethodException e) {
-      e.printStackTrace();
+    } catch (NoSuchMethodException ex) {
+      throw new IllegalStateException(
+          "SVM Substitution: Unable to register method for reflection", ex);
     }
   }
 }
