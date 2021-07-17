@@ -3,7 +3,6 @@ package me.nithanim.aws.dynamodb.enhanced.nativeimage.deployment;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
-import me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime.BeanTableSchemaSubstitutionImplementation;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -15,6 +14,7 @@ import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.BytecodeTransformerBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.gizmo.Gizmo;
+import me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime.BeanTableSchemaSubstitutionImplementation;
 
 /**
  * Fixes that (unit) tests crash by circumventing the {@link java.lang.invoke.LambdaMetafactory} and
@@ -35,6 +35,10 @@ import io.quarkus.gizmo.Gizmo;
  * <p>This might be a bug, since the {@link java.lang.invoke.LambdaMetafactory} has no issue to
  * create the lambda with a class from a foreign classloader (which is expected) but looks up the
  * class in the wrong classloader and subsequently crashes.
+ *
+ * <p>TODO The transformation applies to both tests and runtime! There should be some kind of check
+ * in the substitution-code that only uses the workaround when running tests. In case the {@link
+ * java.lang.invoke.LambdaMetafactory} "bug" is resolved, this whole test-workaround can be removed.
  */
 public class TestClassloaderProcessor {
 
