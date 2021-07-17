@@ -3,4 +3,6 @@
 !/deployment
 !/runtime
 !/.gitignore
+!/LICENSE
 !/pom.xml
+!/README.md
