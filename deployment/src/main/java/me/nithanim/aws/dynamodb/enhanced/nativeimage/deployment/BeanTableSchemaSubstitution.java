@@ -1,11 +1,11 @@
-package org.acme.aws.dynamodb.fix.deployment;
+package me.nithanim.aws.dynamodb.enhanced.nativeimage.deployment;
 
 import java.beans.PropertyDescriptor;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import org.acme.aws.dynamodb.fix.runtime.BeanTableSchemaSubstitutionImplementation;
+import me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime.BeanTableSchemaSubstitutionImplementation;
 
 import com.oracle.svm.core.annotate.Substitute;
 import com.oracle.svm.core.annotate.TargetClass;

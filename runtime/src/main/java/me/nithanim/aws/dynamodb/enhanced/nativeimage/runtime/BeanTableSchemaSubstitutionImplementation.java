@@ -1,4 +1,4 @@
-package org.acme.aws.dynamodb.fix.runtime;
+package me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime;
 
 import java.beans.PropertyDescriptor;
 import java.lang.invoke.MethodHandle;

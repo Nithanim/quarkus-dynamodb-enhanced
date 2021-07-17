@@ -1,9 +1,9 @@
-package org.acme.aws.dynamodb.fix.deployment;
+package me.nithanim.aws.dynamodb.enhanced.nativeimage.deployment;
 
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
-import org.acme.aws.dynamodb.fix.runtime.BeanTableSchemaSubstitutionImplementation;
+import me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime.BeanTableSchemaSubstitutionImplementation;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
