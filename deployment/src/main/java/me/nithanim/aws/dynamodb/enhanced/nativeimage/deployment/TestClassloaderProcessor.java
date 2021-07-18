@@ -26,15 +26,20 @@ import me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime.BeanTableSchemaSubs
  *
  * <p>The thing is that Quarkus uses two different {@link ClassLoader}s for tests: One that loads
  * all dependencies ("dependency"-classloader) and a child (runtime-classloader) that loads
- * everything of the current module (i.e. target/classes/**). For some reason, creating the lambdas
- * (in the context of the dependency-classloader) with the user-class (from the runtime-classloader)
- * works fine. On invocation though, the lambda seems to need some initialization. It tries to
- * located the user-class which it was defined with in the dependency-classloader. Obviously, this
- * fails and crashes testing.
+ * everything of the current module (i.e. target/classes/**). <strike>For some reason, creating the
+ * lambdas (in the context of the dependency-classloader) with the user-class (from the
+ * runtime-classloader) works fine. On invocation though, the lambda seems to need some
+ * initialization. It tries to located the user-class which it was defined with in the
+ * dependency-classloader. Obviously, this fails and crashes testing.</strike>
  *
- * <p>This might be a bug, since the {@link java.lang.invoke.LambdaMetafactory} has no issue to
- * create the lambda with a class from a foreign classloader (which is expected) but looks up the
- * class in the wrong classloader and subsequently crashes.
+ * <p><strike>This might be a bug, since the {@link java.lang.invoke.LambdaMetafactory} has no issue
+ * to create the lambda with a class from a foreign classloader (which is expected) but looks up the
+ * class in the wrong classloader and subsequently crashes.</strike>
+ *
+ * <p>Update: The crash is caused by a bug in the AWS SDK using the wrong {@link
+ * java.lang.invoke.MethodHandles.Lookup} for the {@link java.lang.invoke.MethodHandle}s. The {@link
+ * java.lang.invoke.MethodHandles.Lookup} is used for the lambda, but the {@link
+ * java.lang.invoke.MethodHandles.Lookup} from the bean class must be used.
  *
  * <p>TODO The transformation applies to both tests and runtime! There should be some kind of check
  * in the substitution-code that only uses the workaround when running tests. In case the {@link
