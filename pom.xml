@@ -30,17 +30,6 @@
         <developerConnection>scm:git:ssh://github.com:Nithanim/quarkus-dynamodb-enhanced.git</developerConnection>
         <url>https://github.com/Nithanim/quarkus-dynamodb-enhanced</url>
     </scm>
-    <properties>
-        <compiler-plugin.version>3.8.1</compiler-plugin.version>
-        <failsafe-plugin.version>${surefire-plugin.version}</failsafe-plugin.version>
-        <maven.compiler.parameters>true</maven.compiler.parameters>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus.version>2.0.2.Final</quarkus.version>
-        <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-    </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -117,4 +106,15 @@
             </plugins>
         </pluginManagement>
     </build>
+    <properties>
+        <compiler-plugin.version>3.8.1</compiler-plugin.version>
+        <failsafe-plugin.version>${surefire-plugin.version}</failsafe-plugin.version>
+        <maven.compiler.parameters>true</maven.compiler.parameters>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <quarkus.version>2.0.2.Final</quarkus.version>
+        <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+    </properties>
 </project>
