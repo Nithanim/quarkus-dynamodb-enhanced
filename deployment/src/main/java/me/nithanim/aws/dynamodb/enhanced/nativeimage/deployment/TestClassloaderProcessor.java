@@ -38,11 +38,7 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
  * initialization. It tries to located the user-class which it was defined with in the
  * dependency-classloader. Obviously, this fails and crashes testing.</strike>
  *
- * <p><strike>This might be a bug, since the {@link java.lang.invoke.LambdaMetafactory} has no issue
- * to create the lambda with a class from a foreign classloader (which is expected) but looks up the
- * class in the wrong classloader and subsequently crashes.</strike>
- *
- * <p>Update: The crash is caused by a bug in the AWS SDK using the wrong {@link
+ * <p>The crash is caused by a bug in the AWS SDK using the wrong {@link
  * java.lang.invoke.MethodHandles.Lookup} for the {@link java.lang.invoke.MethodHandle}s. The {@link
  * java.lang.invoke.MethodHandles.Lookup} is used for the lambda, but the {@link
  * java.lang.invoke.MethodHandles.Lookup} from the bean class must be used.
