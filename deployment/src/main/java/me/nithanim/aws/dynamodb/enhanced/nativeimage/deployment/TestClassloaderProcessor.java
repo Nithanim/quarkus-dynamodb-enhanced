@@ -3,6 +3,9 @@ package me.nithanim.aws.dynamodb.enhanced.nativeimage.deployment;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
+import org.jboss.jandex.AnnotationInstance;
+import org.jboss.jandex.ClassInfo;
+import org.jboss.jandex.DotName;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -12,9 +15,12 @@ import org.objectweb.asm.Type;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.BytecodeTransformerBuildItem;
+import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.gizmo.Gizmo;
 import me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime.BeanTableSchemaSubstitutionImplementation;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 
 /**
  * Fixes that (unit) tests crash by circumventing the {@link java.lang.invoke.LambdaMetafactory} and
@@ -55,7 +61,21 @@ public class TestClassloaderProcessor {
   }
 
   @BuildStep
-  void addProcessingStep(BuildProducer<BytecodeTransformerBuildItem> transformers) {
+  public void registerDynamoDbBeansForReflectiveAccess(
+      CombinedIndexBuildItem combinedIndexBuildItem,
+      BuildProducer<ReflectiveClassBuildItem> reflectiveClass) {
+    for (AnnotationInstance i :
+        combinedIndexBuildItem
+            .getIndex()
+            .getAnnotations(DotName.createSimple(DynamoDbBean.class.getName()))) {
+      ClassInfo classInfo = i.target().asClass();
+      reflectiveClass.produce(
+          new ReflectiveClassBuildItem(true, false, classInfo.name().toString()));
+    }
+  }
+
+  @BuildStep
+  void applyClassTransformation(BuildProducer<BytecodeTransformerBuildItem> transformers) {
     transformers.produce(
         new BytecodeTransformerBuildItem(
             "software.amazon.awssdk.enhanced.dynamodb.mapper.BeanTableSchema",
