@@ -12,6 +12,24 @@
         <module>deployment</module>
         <module>runtime</module>
     </modules>
+    <licenses>
+        <license>
+            <name>The Unlicense</name>
+            <url>https://unlicense.org/</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>Nithanim</id>
+            <name>Nithanim</name>
+            <email>git@nithanim.me</email>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git@github.com:Nithanim/quarkus-dynamodb-enhanced.git</connection>
+        <developerConnection>scm:git:ssh://github.com:Nithanim/quarkus-dynamodb-enhanced.git</developerConnection>
+        <url>https://github.com/Nithanim/quarkus-dynamodb-enhanced</url>
+    </scm>
     <properties>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <failsafe-plugin.version>${surefire-plugin.version}</failsafe-plugin.version>
