@@ -4,12 +4,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.acme</groupId>
-        <artifactId>aws-dynamodb-fix-parent</artifactId>
+        <groupId>me.nithanim.quarkus</groupId>
+        <artifactId>quarkus-amazon-dynamodb-enhanced-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>aws-dynamodb-fix</artifactId>
-    <name>Aws Dynamodb Fix - Runtime</name>
+    <artifactId>quarkus-amazon-dynamodb-enhanced</artifactId>
+    <name>Quarkus - Amazon Services - DynamoDB - Enhanced - Runtime</name>
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
