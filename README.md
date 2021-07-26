@@ -32,7 +32,7 @@ Import the fix to your project:
 ```xml
 <dependency>
     <groupId>me.nithanim.quarkus</groupId>
-    <artifactId>quarkus-amazon-dynamodb-enhanced-parent</artifactId>
+    <artifactId>quarkus-amazon-dynamodb-enhanced</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
