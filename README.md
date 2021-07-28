@@ -38,8 +38,23 @@ Import the fix to your project:
 ```
 WARNING:
 This extension is built against a specific quarkus version (see pom.xml properties).
-Since no specific features are used, you can exclude the dependencies and add them yourself (like every other quarkus dependency you have added).
+Since you are probably using the quarkus version bom in your project like so:
+```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>${quarkus.platform.group-id}</groupId>
+            <artifactId>${quarkus.platform.artifact-id}</artifactId>
+            <version>${quarkus.platform.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+the versions defined there take precedence over the ones defined in this extension.
 
+In any case, you can always exclude the dependencies and add them to your project directly (like every other quarkus dependency you have added).
 It might look something like this:
 ```xml
 <dependencies>
