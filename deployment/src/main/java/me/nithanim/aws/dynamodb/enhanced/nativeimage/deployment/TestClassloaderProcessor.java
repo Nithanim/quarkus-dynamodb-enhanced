@@ -17,8 +17,10 @@ import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.BytecodeTransformerBuildItem;
 import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.LaunchModeBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.gizmo.Gizmo;
+import io.quarkus.runtime.LaunchMode;
 import me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime.BeanTableSchemaSubstitutionImplementation;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 
@@ -50,6 +52,8 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 public class TestClassloaderProcessor {
 
   private static final String FEATURE = "aws-dynamodb-enhanced";
+  public static final String CLASS_NAME_BEAN_TABLE_SCHEMA =
+      "software.amazon.awssdk.enhanced.dynamodb.mapper.BeanTableSchema";
 
   @BuildStep
   FeatureBuildItem feature() {
@@ -71,11 +75,31 @@ public class TestClassloaderProcessor {
   }
 
   @BuildStep
-  void applyClassTransformation(BuildProducer<BytecodeTransformerBuildItem> transformers) {
+  void maybeApplyClassTransformation(
+      BuildTimeConfig buildTimeConfig,
+      BuildProducer<BytecodeTransformerBuildItem> transformers,
+      LaunchModeBuildItem launchModeBuildItem) {
+    if (shouldApplyClassTransformation(buildTimeConfig, launchModeBuildItem)) {
+      applyClassTransformation(transformers);
+    }
+  }
+
+  private void applyClassTransformation(BuildProducer<BytecodeTransformerBuildItem> transformers) {
     transformers.produce(
         new BytecodeTransformerBuildItem(
-            "software.amazon.awssdk.enhanced.dynamodb.mapper.BeanTableSchema",
-            new MethodCallRedirectionVisitor()));
+            CLASS_NAME_BEAN_TABLE_SCHEMA, new MethodCallRedirectionVisitor()));
+  }
+
+  /**
+   * Decides if the transformation should be applied. Predominantly this should only happen in
+   * non-production builds because only a single {@link ClassLoader} is used there making this "fix"
+   * useless and probably worsens performance. Second, we do not apply the transformation when
+   * requested through config.
+   */
+  private boolean shouldApplyClassTransformation(
+      BuildTimeConfig buildTimeConfig, LaunchModeBuildItem launchModeBuildItem) {
+    return buildTimeConfig.jvmTransformation
+        && launchModeBuildItem.getLaunchMode() != LaunchMode.NORMAL;
   }
 
   private static class MethodCallRedirectionVisitor
