@@ -7,7 +7,16 @@ This extension specifically fixes the following problems:
 * `ClassDefNotFoundError` when running tests (with quarkus)
 * GraalVM Native-image runtime/reflection issues
 
-Warning: The fix for tests has a slight performance-hit in production when using normal jvm mode. It can be removed when https://github.com/aws/aws-sdk-java-v2/issues/2604 is fixed. (Info: The "fix" is the same as the fix for GraalVM Native-image.) 
+The fix for quarkus-tests uses the same workaround as for the native-image.
+There is no other way (from my point of view) for native-image (except full support for dynamically generated lambdas).
+But for jvm mode it has a slight performance-hit in contrast to the lambdas.
+
+A detection is in place such that the fix for tests is only applied when in "test"-profile.
+For normal builds (like prod) this fix is not applied so you keep the full `LambdaMetafactory` performance.
+
+Everything should just work out-of-the box ❤️
+
+Note: The workaround for tests can be removed when https://github.com/aws/aws-sdk-java-v2/issues/2604 is fixed.
 
 ## What does it do technically
 
@@ -20,15 +29,22 @@ There is also an additional bugfix for quarkus in there that deals with multiple
 As a bonus, since the `DynamoDbBean`s are accessed by reflection, they are automatically registered for this purpose in the GraalVM native-image generation.
 This means that you do not need to add `@RegisterForReflection` to all your beans.
 
-Everything should work out-of-the box ❤️
-
 If want to know even more about the technical side, feel free to dive into the code.
 You can find extensive information in the javadoc (and of course the code itself)!
 
+## Can I use it in production?
+
+Probably. You certainly have to decide for yourself if you want to take the risk. See the disclaimer in the license!
+
+I just researched and spent weeks trying to fix all problems because I needed it for work. (However, there is no association! I did that in my free time!)
+
+We deployed it in production and has been running happily since!
+
 ## Usage
 
-To use this extension, make sure you match the quarkus version is the parent pom with your quarkus version.
-Import the fix to your project:
+### pom.xml
+
+To use this extension, just import it as a normal dependency:
 ```xml
 <dependency>
     <groupId>me.nithanim.quarkus</groupId>
@@ -36,7 +52,8 @@ Import the fix to your project:
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
-WARNING:
+
+NOTE/WARNING:
 This extension is built against a specific quarkus version (see pom.xml properties).
 Since you are probably using the quarkus version bom in your project like so:
 ```xml
@@ -88,3 +105,13 @@ It might look something like this:
 </dependencies>
 ```
 Then maven will pull the versions that are defined via your quarkus import.
+
+### Config
+
+Currently, there is only a single config property for `application.properties:
+```properties
+quarkus.dynamodb-enhanced.jvm-transformation=true
+```
+It controls whether the fix for the ClassLoader problems for tests should be applied.
+It is there just in case that there are any problems with the detection of the current build environment.
+IF there are problems you can set it specifically for prod to `false` to not give up any speed at runtime.
