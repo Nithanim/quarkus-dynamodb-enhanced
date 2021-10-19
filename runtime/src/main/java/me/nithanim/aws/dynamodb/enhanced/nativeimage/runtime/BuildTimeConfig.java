@@ -1,4 +1,4 @@
-package me.nithanim.aws.dynamodb.enhanced.nativeimage.deployment;
+package me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime;
 
 import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;

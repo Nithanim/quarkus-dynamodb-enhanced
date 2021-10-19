@@ -22,6 +22,7 @@ import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.gizmo.Gizmo;
 import io.quarkus.runtime.LaunchMode;
 import me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime.BeanTableSchemaSubstitutionImplementation;
+import me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime.BuildTimeConfig;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 
 /**
