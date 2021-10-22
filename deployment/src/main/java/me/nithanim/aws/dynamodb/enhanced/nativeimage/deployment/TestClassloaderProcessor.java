@@ -35,11 +35,11 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
  *
  * <p>The thing is that Quarkus uses two different {@link ClassLoader}s for tests: One that loads
  * all dependencies ("dependency"-classloader) and a child (runtime-classloader) that loads
- * everything of the current module (i.e. target/classes/**). <strike>For some reason, creating the
+ * everything of the current module (i.e. target/classes/**). <s>For some reason, creating the
  * lambdas (in the context of the dependency-classloader) with the user-class (from the
  * runtime-classloader) works fine. On invocation though, the lambda seems to need some
  * initialization. It tries to located the user-class which it was defined with in the
- * dependency-classloader. Obviously, this fails and crashes testing.</strike>
+ * dependency-classloader. Obviously, this fails and crashes testing.</s>
  *
  * <p>The crash is caused by a bug in the AWS SDK using the wrong {@link
  * java.lang.invoke.MethodHandles.Lookup} for the {@link java.lang.invoke.MethodHandle}s. The {@link
