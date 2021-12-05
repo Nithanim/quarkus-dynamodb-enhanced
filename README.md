@@ -49,7 +49,7 @@ To use this extension, just import it as a normal dependency:
 <dependency>
     <groupId>me.nithanim.quarkus</groupId>
     <artifactId>quarkus-amazon-dynamodb-enhanced</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
