@@ -1,4 +1,4 @@
-package me.nithanim.aws.dynamodb.enhanced.nativeimage.deployment;
+package me.nithanim.aws.dynamodb.enhanced.nativeimage.runtime;
 
 import java.beans.PropertyDescriptor;
 import java.util.function.BiConsumer;
