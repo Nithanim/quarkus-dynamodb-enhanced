@@ -52,7 +52,7 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
  */
 public class TestClassloaderProcessor {
 
-  private static final String FEATURE = "aws-dynamodb-enhanced";
+  private static final String FEATURE = "amazon-dynamodb-enhanced";
   public static final String CLASS_NAME_BEAN_TABLE_SCHEMA =
       "software.amazon.awssdk.enhanced.dynamodb.mapper.BeanTableSchema";
 
