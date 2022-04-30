@@ -3,6 +3,7 @@
 !/.github
 !/deployment
 !/runtime
+!/test
 !/.gitignore
 !/LICENSE
 !/pom.xml
