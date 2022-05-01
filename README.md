@@ -49,24 +49,33 @@ To use this extension, just import it as a normal dependency:
 <dependency>
     <groupId>me.nithanim.quarkus</groupId>
     <artifactId>quarkus-amazon-dynamodb-enhanced</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
 </dependency>
 ```
+Note:
+For Quarkus below version 2.6 (which introduced Quarkiverse) use version `1.0.1`.
 
-NOTE/WARNING:
+Note/Warning:
 This extension is built against a specific quarkus version (see pom.xml properties).
 Since you are probably using the quarkus version bom in your project like so:
 ```xml
 <dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>${quarkus.platform.group-id}</groupId>
-            <artifactId>${quarkus.platform.artifact-id}</artifactId>
+            <groupId>io.quarkus.platform</groupId>
+            <artifactId>quarkus-bom</artifactId>
             <version>${quarkus.platform.version}</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
     </dependencies>
+    <dependency>
+        <groupId>io.quarkus.platform</groupId>
+        <artifactId>quarkus-amazon-services-bom</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+    </dependency>
 </dependencyManagement>
 ```
 the versions defined there take precedence over the ones defined in this extension.
