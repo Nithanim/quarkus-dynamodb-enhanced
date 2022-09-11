@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.nithanim.quarkus</groupId>
     <artifactId>quarkus-amazon-dynamodb-enhanced-parent</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Quarkus - Amazon Services - DynamoDB - Enhanced - Parent</name>
     <description>Fixes aws dynamodb enhanced for quarkus and graal native image.</description>
@@ -182,7 +182,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus.version>2.8.2.Final</quarkus.version>
+        <quarkus.version>2.12.1.Final</quarkus.version>
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     </properties>
 </project>

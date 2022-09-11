@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>2.8.2.Final</quarkus.platform.version>
+        <quarkus.platform.version>2.12.1.Final</quarkus.platform.version>
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     </properties>
     <dependencyManagement>
@@ -69,7 +69,7 @@
         <dependency>
             <groupId>me.nithanim.quarkus</groupId>
             <artifactId>quarkus-amazon-dynamodb-enhanced</artifactId>
-            <version>1.1.0-SNAPSHOT</version>
+            <version>1.2.0-SNAPSHOT</version>
         </dependency>
         <!--<dependency>
             <groupId>io.quarkus</groupId>
