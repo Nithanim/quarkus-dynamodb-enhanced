@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.nithanim.quarkus</groupId>
     <artifactId>quarkus-amazon-dynamodb-enhanced-parent</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Quarkus - Amazon Services - DynamoDB - Enhanced - Parent</name>
     <description>Fixes aws dynamodb enhanced for quarkus and graal native image.</description>
@@ -29,7 +29,7 @@
         <connection>scm:git:git://github.com/Nithanim/quarkus-dynamodb-enhanced.git</connection>
         <developerConnection>scm:git:git@github.com:Nithanim/quarkus-dynamodb-enhanced.git</developerConnection>
         <url>https://github.com/Nithanim/quarkus-dynamodb-enhanced</url>
-        <tag>quarkus-amazon-dynamodb-enhanced-parent-1.2.0</tag>
+        <tag>HEAD</tag>
     </scm>
     <dependencyManagement>
         <dependencies>
